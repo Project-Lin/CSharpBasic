@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CSharp\\CSharpBasic\\Exercise\\Assignment1\\Assignment1\\Assignment1.csproj": {}
+    "C:\\CSharp\\CSharpBasic\\Exercise\\Exercise1\\Exercise1\\Exercise1\\Exercise1.csproj": {}
   },
   "projects": {
-    "C:\\CSharp\\CSharpBasic\\Exercise\\Assignment1\\Assignment1\\Assignment1.csproj": {
+    "C:\\CSharp\\CSharpBasic\\Exercise\\Exercise1\\Exercise1\\Exercise1\\Exercise1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CSharp\\CSharpBasic\\Exercise\\Assignment1\\Assignment1\\Assignment1.csproj",
-        "projectName": "Assignment1",
-        "projectPath": "C:\\CSharp\\CSharpBasic\\Exercise\\Assignment1\\Assignment1\\Assignment1.csproj",
+        "projectUniqueName": "C:\\CSharp\\CSharpBasic\\Exercise\\Exercise1\\Exercise1\\Exercise1\\Exercise1.csproj",
+        "projectName": "Exercise1",
+        "projectPath": "C:\\CSharp\\CSharpBasic\\Exercise\\Exercise1\\Exercise1\\Exercise1\\Exercise1.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\CSharp\\CSharpBasic\\Exercise\\Assignment1\\Assignment1\\obj\\",
+        "outputPath": "C:\\CSharp\\CSharpBasic\\Exercise\\Exercise1\\Exercise1\\Exercise1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
