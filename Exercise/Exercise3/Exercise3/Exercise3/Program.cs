@@ -18,9 +18,9 @@
         static string[] Class = new string[] { "戰士", "遊俠", "盜賊", "法師" };
         static string pName;
         static int pClass, pLevel, pStr, pInt, pDex, pLuk, pExp, pExpMax, attackTarget, pDamage;
-        static int[] bag = new int[5];
+        static int[] bag = new int[5] { 0,0,0,0,0};
         static bool isQuit, isSetClass;
-        static string Anser;
+        static string Anser = null;
         static Random ram = new Random();
 
         static void InitializeGame()
@@ -29,6 +29,8 @@
             mHpMax = new int[] { 100, 200, 300, 400, 500, 600 };
             mExp = new int[] { 10, 20, 30, 40, 50 };
             mIsDead = new bool[] { false, false, false, false, false };
+            attackTarget = -1;
+            pExpMax = 150;
             Console.WriteLine("歡迎來到地獄M\n請輸入您的姓名:");
             pName = Console.ReadLine();
             while (!isSetClass)
@@ -110,7 +112,7 @@
             }
             else if (Anser == "4")
             {
-                UseExplosive();
+                UseBoom();
             }
             else if (Anser == "5")
             {
@@ -135,6 +137,26 @@
         static void DisplayPlayerStatus()
         {
             Console.WriteLine($"名稱:{pName}\n職業:{Class[pClass]}\n等級:{pLevel}\n\n能力值\n力量:{pStr}\n智力:{pInt}\n敏捷:{pDex}\n幸運:{pLuk}\n\n經驗值:{pExp}/{pExpMax}");
+            Console.WriteLine("背包");
+            Console.WriteLine($"||{GetItemName(0)}||{GetItemName(1)}||{GetItemName(2)}||{GetItemName(3)}||{GetItemName(4)}||");
+        }
+
+        static string GetItemName(int position)
+        {
+            int item = bag[position];
+            if (item == 0)
+            {
+                return "空";
+            }
+            else if (item == 1)
+            {
+                return "炸彈";
+            }
+            else
+            {
+                return "空";
+            }
+
         }
 
         static void SelectAttackTarget()
@@ -242,12 +264,31 @@
             Console.WriteLine($"已擊敗{mName[index]}\n");
             mIsDead[index] = true;
             int dice = ram.Next(0, 100);
-            if (dice < 50)
+            if (dice < 100)
             {
                 Console.WriteLine("恭喜!!獲得一個炸彈\n");
-                bag[0] += 1;
+                //bag[0] += 1;
+                AddToBag();
             }
             GainExperience(mExp[index]);
+        }
+
+        static void AddToBag()
+        {
+            bool IsAdd = false;
+            for (int i = 0;i<bag.Length;i++)
+            {
+                if (bag[i] == 0&& IsAdd==false)
+                {
+                    bag[i] = 1;
+                    IsAdd = true;
+                    break;
+                }
+            }
+            if (IsAdd == false)
+            {
+                Console.WriteLine("背包已滿，炸彈已被丟棄");
+            }
         }
 
         static void GainExperience(int exp)
@@ -273,15 +314,16 @@
             pInt += pLevel;
             pLuk += pLevel;
             pDex += pLevel;
+            pExpMax = pLevel * 50 + pLevel;
         }
 
-        static void UseExplosive()
+        static void UseBoom()
         {
             if (attackTarget == -1)
             {
                 Console.WriteLine("請先選擇攻擊目標");
             }
-            else if (bag[0] > 0)
+            else if (CheckBoom())
             {
                 Console.WriteLine($"使用炸彈，對{mName[attackTarget]}造成了{3 * pDamage}點傷害");
                 bag[0] -= 1;
@@ -336,6 +378,19 @@
             {
                 Console.WriteLine($"{mName[int.Parse(Anser) - 1]}未死亡\n請選擇死亡的目標");
             }
+        }
+
+        static bool CheckBoom()
+        {
+            for (int i = 0; i<bag.Length; i++)
+            {
+                if (bag[i] == 1)
+                {
+                    bag[i] = 0;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
