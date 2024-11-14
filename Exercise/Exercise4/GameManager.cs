@@ -11,12 +11,13 @@ namespace Exercise4
     {
         Monster monster = new Monster();
         Player player = new Player();
-        PlayerClass playerClass = new PlayerClass();
+        //PlayerClass playerClass = new PlayerClass();
+        Menu menu = new Menu();
         public bool isQuit = false;
         public void InitializeGame()
         {
             player.SetName();
-            while (!playerClass.isSetClass)
+            while (!player.isSetClass)
             {
                 playerClass.SetPlayerClass();
             }
@@ -42,6 +43,16 @@ namespace Exercise4
         {
             player.ShowState();
         }
+
+        public void StartGame()
+        {
+            while (!isQuit)
+            {
+                menu.DisplayMenu();
+                menu.HandleUserInput();
+            }
+        }
+
 
     }
 }

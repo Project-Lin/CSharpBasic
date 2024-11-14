@@ -4,11 +4,14 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using static Exercise4.PlayerClass;
 
 namespace Exercise4
 {
     internal class Player
     {
+        PlayerClass playerClass = new PlayerClass();
+        Bag bag = new Bag();
         public string Name = null;
         public int Class, Level, Str, Int, Dex, Luk, Exp, ExpMax, attackTarget, Damage;
         public bool isSetClass = false;
@@ -20,8 +23,6 @@ namespace Exercise4
         }
         public void ShowState()
         {
-            PlayerClass playerClass = new PlayerClass();
-            Bag bag = new Bag();
             Console.WriteLine($"名稱:{Name}");
             Console.WriteLine($"職業:{playerClass.GetName(Class)}");
             Console.WriteLine($"等級:{Level}");
@@ -83,9 +84,45 @@ namespace Exercise4
             Name = Anser;
         }
 
-        public string GetName()
+        public void SetPlayerClass()
         {
-            return Name;
+            Console.WriteLine($"您好，勇者{GetName()}，請選擇您的職業\n1.戰士\n2.遊俠\n3.盜賊\n4.法師");
+            string Anser = Console.ReadLine();
+            if (Anser == "1")
+            {
+                SetClassStats((int)pClass.warrior);
+            }
+            else if (Anser == "2")
+            {
+                SetClassStats((int)pClass.ranger);
+            }
+            else if (Anser == "3")
+            {
+                SetClassStats((int)pClass.thief);
+            }
+            else if (Anser == "4")
+            {
+                SetClassStats((int)pClass.mage);
+            }
+            else
+            {
+                Console.WriteLine("已取消，返回選擇選單");
+            }
+        }
+
+        public void SetClassStats(int classIndex)
+        {
+
+
+            playerClass.ShowAbility(classIndex);
+            bool Anser = menu.Check();
+
+            if (Anser)
+            {
+                classAbilitySet.Set(classIndex);
+                CalculateDamage();
+                isSetClass = true;
+            }
         }
 
     }

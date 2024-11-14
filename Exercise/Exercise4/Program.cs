@@ -5,13 +5,9 @@
         static void Main(string[] args)
         {
             GameManager gameManager = new GameManager();
-            Menu menu = new Menu();
+            //Menu menu = new Menu();
             gameManager.InitializeGame() ;
-            while (!gameManager.isQuit)
-            {
-                menu.DisplayMenu();
-                menu.HandleUserInput();
-            }
+            gameManager.StartGame();
         }
     }
 }
