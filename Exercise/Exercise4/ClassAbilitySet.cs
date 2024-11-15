@@ -2,115 +2,39 @@
 {
     internal class ClassAbilitySet
     {
-        public string[] Class = new string[] { "戰士", "遊俠", "盜賊", "法師" };
+        public const string WorriorName = "戰士";
+        public const int WorriorClassNumber = 0;
+        public const int WorriorStr = 10;
+        public const int WorriorInt = 1;
+        public const int WorriorDex = 5;
+        public const int WorriorLuk = 2;
+        
+        public const string RangerName = "遊俠";
+        public const int RangerClassNumber = 1;
+        public const int RangerStr = 5;
+        public const int RangerInt = 2;
+        public const int RangerDex = 10;
+        public const int RangerLuk = 1;
+        
+        public const string ThiefName = "盜賊";
+        public const int ThiefClassNumber = 2;
+        public const int ThiefStr = 2;
+        public const int ThiefInt = 1;
+        public const int ThiefDex = 5;
+        public const int ThiefLuk = 10;
+        
+        public const string MageName = "法師";
+        public const int MageClassNumber = 3;
+        public const int MageStr = 1;
+        public const int MageInt = 10;
+        public const int MageDex = 4;
+        public const int MageLuk = 3;
+        
+        public static string [] ClassName = new string[]  { WorriorName, RangerName, ThiefName, MageName };
+        public static int [] ClassStr = new int[]  { WorriorStr, RangerStr, ThiefStr, MageStr };
+        public static int [] ClassInt = new int[]  { WorriorInt, RangerInt, ThiefInt, MageInt };
+        public static int [] ClassDex = new int[]  { WorriorDex, RangerDex, ThiefDex, MageDex };
+        public static int [] ClassLuk = new int[]  { WorriorLuk, RangerLuk, ThiefLuk, MageLuk };
 
-        public int warriorClass = 0;
-        public int warriorStr = 10;
-        public int warriorInt = 1;
-        public int warriorDex = 5;
-        public int warriorLuk = 2;
-
-        public int rangerClass = 1;
-        public int rangerStr = 5;
-        public int rangerInt = 2;
-        public int rangerDex = 10;
-        public int rangerLuk = 1;
-
-        public int thiefClass = 2;
-        public int thiefStr = 2;
-        public int thiefInt = 1;
-        public int thiefDex = 5;
-        public int thiefLuk = 10;
-
-        public int mageClass = 3;
-        public int mageStr = 1;
-        public int mageInt = 10;
-        public int mageDex = 4;
-        public int mageLuk = 3;
-
-        public void Show(int _Class)
-        {
-            switch (_Class)
-            {
-                case 0:
-                    Console.WriteLine($"{Class[_Class]}");
-                    Console.WriteLine($"力量:{warriorStr}");
-                    Console.WriteLine($"智力:{warriorInt}");
-                    Console.WriteLine($"敏捷:{warriorDex}");
-                    Console.WriteLine($"幸運:{warriorLuk}");
-                    Console.WriteLine($"\n確定要選擇{Class[_Class]}嗎?(Y/N)");
-                    break;
-
-                case 1:
-                    Console.WriteLine($"{Class[_Class]}");
-                    Console.WriteLine($"力量:{rangerStr}");
-                    Console.WriteLine($"智力:{rangerInt}");
-                    Console.WriteLine($"敏捷:{rangerDex}");
-                    Console.WriteLine($"幸運:{rangerLuk}");
-                    Console.WriteLine($"\n確定要選擇{Class[_Class]}嗎?(Y/N)");
-                    break;
-
-                case 2:
-                    Console.WriteLine($"{Class[_Class]}");
-                    Console.WriteLine($"力量:{thiefStr}");
-                    Console.WriteLine($"智力:{thiefInt}");
-                    Console.WriteLine($"敏捷:{thiefDex}");
-                    Console.WriteLine($"幸運:{thiefLuk}");
-                    Console.WriteLine($"\n確定要選擇{Class[_Class]}嗎?(Y/N)");
-                    break;
-                
-                case 3:
-                    Console.WriteLine($"{Class[_Class]}");
-                    Console.WriteLine($"力量:{mageStr}");
-                    Console.WriteLine($"智力:{mageInt}");
-                    Console.WriteLine($"敏捷:{mageDex}");
-                    Console.WriteLine($"幸運:{mageLuk}");
-                    Console.WriteLine($"\n確定要選擇{Class[_Class]}嗎?(Y/N)");
-                    break;
-            }
-
-
-        }
-
-        public void Set(int Class)
-        {
-            Player player = new Player();
-            switch (Class)
-            {
-                case 0:
-                    player.Class = warriorClass;
-                    player.Str = warriorStr;
-                    player.Int = warriorInt;
-                    player.Dex = warriorDex;
-                    player.Luk = warriorLuk;
-                    break;
-
-                case 1:
-                    player.Class = rangerClass;
-                    player.Str = rangerStr;
-                    player.Int = rangerInt;
-                    player.Dex = rangerDex;
-                    player.Luk = rangerLuk;
-                    break;
-
-                case 2:
-                    player.Class = thiefClass;
-                    player.Str = thiefStr;
-                    player.Int = thiefInt;
-                    player.Dex = thiefDex;
-                    player.Luk = thiefLuk;
-                    break;
-
-                case 3:
-                    player.Class = mageClass;
-                    player.Str = mageStr;
-                    player.Int = mageInt;
-                    player.Dex = mageDex;
-                    player.Luk = mageLuk;
-                    break;
-            }
-
-
-        }
     }
 }

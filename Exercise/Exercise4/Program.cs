@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            GameManager gameManager = new GameManager();
+
+            GameManager gameManager = GameManager.Instance();
             //Menu menu = new Menu();
             gameManager.InitializeGame() ;
             gameManager.StartGame();

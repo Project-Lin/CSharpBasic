@@ -4,126 +4,161 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using static Exercise4.PlayerClass;
+using static Exercise4.PlayerAbility;
 
 namespace Exercise4
 {
     internal class Player
     {
-        PlayerClass playerClass = new PlayerClass();
-        Bag bag = new Bag();
+        public Bag bag = new Bag();
+        public PlayerAbility ability = new PlayerAbility();
         public string Name = null;
-        public int Class, Level, Str, Int, Dex, Luk, Exp, ExpMax, attackTarget, Damage;
+        public int level, Exp, ExpMax, attackTarget, damage;
         public bool isSetClass = false;
         public Player()
         {
+            level = 1;
             Exp = 0;
             ExpMax = 150;
             attackTarget = -1;            
         }
-        public void ShowState()
+        public  void ShowState(Bag _bag)
         {
+            ShowAbility();
+            Console.WriteLine("\n背包");
+            _bag.ShowBag();
+            
+        }
+
+        public void ShowLevelUpState(int puls)
+        {
+            Console.WriteLine("升級!!");
             Console.WriteLine($"名稱:{Name}");
-            Console.WriteLine($"職業:{playerClass.GetName(Class)}");
-            Console.WriteLine($"等級:{Level}");
+            Console.WriteLine($"職業:{ability.className}");
+            Console.WriteLine($"等級:{level}");
 
             Console.WriteLine("\n能力值");
-            Console.WriteLine($"力量:{Str}");
-            Console.WriteLine($"智力:{Int}");
-            Console.WriteLine($"敏捷:{Dex}");
-            Console.WriteLine($"幸運:{Luk}");
+            Console.WriteLine($"力量:{ability.str}+{puls}");
+            Console.WriteLine($"智力:{ability.Int}+{puls}");
+            Console.WriteLine($"敏捷:{ability.dex}+{puls}");
+            Console.WriteLine($"幸運:{ability.luk}+{puls}");
 
             Console.WriteLine($"\n經驗值{Exp}/{ExpMax}");
+        }
+        public void ShowAbility()
+        {
+            Console.WriteLine($"名稱:{Name}");
+            Console.WriteLine($"職業:{ability.className}");
+            Console.WriteLine($"等級:{level}");
 
-            Console.WriteLine("背包");
-            bag.ShowBag();
-            
+            Console.WriteLine("\n能力值");
+            Console.WriteLine($"力量:{ability.str}");
+            Console.WriteLine($"智力:{ability.Int}");
+            Console.WriteLine($"敏捷:{ability.dex}");
+            Console.WriteLine($"幸運:{ability.luk}");
+
+            Console.WriteLine($"\n經驗值{Exp}/{ExpMax}");
         }
 
         public void CalculateDamage()
         {
-            switch (Class)
+            switch (ability.classNumber)
             {
                 case 0:
-                    Damage = 10 * Str + 2 * Int + 3 * Dex + 2 * Luk;
+                    damage = 10 * ability.str + 2 * ability.Int + 3 * ability.dex + 2 * ability.luk;
                     break;
                 case 1:
-                    Damage = 3 * Str + 2 * Int + 7 * Dex + 2 * Luk;
+                    damage = 3 * ability.str + 2 * ability.Int + 7 * ability.dex + 2 * ability.luk;
                     break;
                 case 2:
-                    Damage = 4 * Str + 2 * Int + 3 * Dex + 6 * Luk;
+                    damage = 4 * ability.str + 2 * ability.Int + 3 * ability.dex + 6 * ability.luk;
                     break;
                 case 3:
-                    Damage = 1 * Str + 10 * Int + 1 * Dex + 1 * Luk;
+                    damage = 1 * ability.str + 10 * ability.Int + 1 * ability.dex + 1 * ability.luk;
                     break;
             }
         }
+        
 
-        public void ShowLevelUpState()
-        {
-            PlayerClass playerClass = new PlayerClass();
-            Console.WriteLine("升級!!");
-            Console.WriteLine($"\n名稱:{Name}");
-            Console.WriteLine($"職業:{playerClass.GetName(Class)}");
-            Console.WriteLine($"等級:{Level}");
-
-            Console.WriteLine("\n能力值");
-            Console.WriteLine($"力量:{Str}+{Level}");
-            Console.WriteLine($"智力:{Int}+{Level}");
-            Console.WriteLine($"敏捷:{Dex}+{Level}");
-            Console.WriteLine($"幸運:{Luk}+{Level}");
-
-            Console.WriteLine($"\n經驗值{Exp}/{ExpMax}");
-
-        }
-
-        public void SetName()
+        public  void SetName()
         {
             Console.WriteLine("歡迎來到地獄M\n請輸入您的姓名:");
             string Anser = Console.ReadLine();
             Name = Anser;
         }
 
-        public void SetPlayerClass()
+        public void SetClass()
         {
-            Console.WriteLine($"您好，勇者{GetName()}，請選擇您的職業\n1.戰士\n2.遊俠\n3.盜賊\n4.法師");
+            
+            Console.WriteLine("請選擇職業");
+            for (int i = 0; i < ClassAbilitySet.ClassName.Length; i++)
+            {
+                Console.WriteLine($"[{i+1}] {ClassAbilitySet.ClassName[i]}");
+            }
             string Anser = Console.ReadLine();
             if (Anser == "1")
             {
-                SetClassStats((int)pClass.warrior);
-            }
+                ShowSelectClass(0);
+                Confirm(0);
+            }   
             else if (Anser == "2")
             {
-                SetClassStats((int)pClass.ranger);
+                ShowSelectClass(1);
+                Confirm(1);
             }
             else if (Anser == "3")
             {
-                SetClassStats((int)pClass.thief);
+                ShowSelectClass(2);
+                Confirm(2);
             }
             else if (Anser == "4")
             {
-                SetClassStats((int)pClass.mage);
+                ShowSelectClass(3);
+                Confirm(3);
             }
             else
             {
-                Console.WriteLine("已取消，返回選擇選單");
+                Console.WriteLine("請輸入正確指令");
             }
         }
 
-        public void SetClassStats(int classIndex)
+        private void ShowSelectClass(int _classNumber)
         {
+            Console.WriteLine($"{ClassAbilitySet.ClassName[_classNumber]}");
+            Console.WriteLine("能力值");
+            Console.WriteLine($"力量:{ClassAbilitySet.ClassStr[_classNumber]}");
+            Console.WriteLine($"智力:{ClassAbilitySet.ClassInt[_classNumber]}");
+            Console.WriteLine($"敏捷:{ClassAbilitySet.ClassDex[_classNumber]}");
+            Console.WriteLine($"幸運:{ClassAbilitySet.ClassLuk[_classNumber]}");
+        }
 
-
-            playerClass.ShowAbility(classIndex);
-            bool Anser = menu.Check();
-
-            if (Anser)
+        private void Confirm(int _classNumber)
+        {
+            Console.WriteLine("確定要選擇這個職業嗎?(Y/N)");
+            bool sayYes= Menu.CheckYesOrNo();
+            if (sayYes)
             {
-                classAbilitySet.Set(classIndex);
-                CalculateDamage();
+                CreatPlayerClass(_classNumber);
                 isSetClass = true;
             }
         }
 
+        private void CreatPlayerClass(int _classNumber)
+        {
+            ability = new PlayerAbility(_classNumber);
+        }
+        
+        
+
+        
+        
+        
+        
+        
+
+        
+
+
+        
     }
 }
