@@ -1,18 +1,19 @@
 {
   "format": 1,
   "restore": {
-    "P:\\CSharpBasic\\Exercise\\Exercise4\\Exercise4.csproj": {}
+    "P:\\CSharpBasic\\Exercise\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "P:\\CSharpBasic\\Exercise\\Exercise4\\Exercise4.csproj": {
+    "P:\\CSharpBasic\\Exercise\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "P:\\CSharpBasic\\Exercise\\Exercise4\\Exercise4.csproj",
-        "projectName": "Exercise4",
-        "projectPath": "P:\\CSharpBasic\\Exercise\\Exercise4\\Exercise4.csproj",
+        "projectUniqueName": "P:\\CSharpBasic\\Exercise\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectName": "ConsoleApp1",
+        "projectPath": "P:\\CSharpBasic\\Exercise\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\s1120\\.nuget\\packages\\",
-        "outputPath": "P:\\CSharpBasic\\Exercise\\Exercise4\\obj\\",
+        "outputPath": "P:\\CSharpBasic\\Exercise\\ConsoleApp1\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "C:\\Users\\s1120\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

@@ -7,27 +7,30 @@ using System.Threading.Tasks;
 
 namespace Exercise4
 {
-     internal  class GameManager
+    internal class GameManager
     {
-        
         private static GameManager isInstance = null;
+
         private GameManager()
         {
         }
+
         public static GameManager Instance()
         {
-            if (isInstance==null)
+            if (isInstance == null)
             {
-                isInstance=new GameManager();
+                isInstance = new GameManager();
             }
+
             return isInstance;
         }
-        
+
         Player player = new Player();
         Monster monster = new Monster();
-        Menu menu = new Menu(); 
+        Menu menu = new Menu();
         Random ram = new Random();
         public bool isQuit = false;
+
         public void InitializeGame()
         {
             player.SetName();
@@ -35,6 +38,7 @@ namespace Exercise4
             {
                 player.SetClass();
             }
+
             player.CalculateDamage();
         }
 
@@ -55,7 +59,6 @@ namespace Exercise4
         }
 
 
-
         public void StartGame()
         {
             while (!isQuit)
@@ -64,6 +67,7 @@ namespace Exercise4
                 HandleUserInput();
             }
         }
+
         public void HandleUserInput()
         {
             string Anser = Console.ReadLine();
@@ -95,28 +99,27 @@ namespace Exercise4
                     player.attackTarget = reviveNumber;
                     Console.WriteLine($"已將攻擊目標設定為{monster.Name[reviveNumber]}");
                 }
-                
             }
             else
             {
                 Console.WriteLine("請輸入正確指令");
             }
         }
-        
+
         public void SelectAttackTarget()
         {
-            Console.WriteLine($"[1]{monster.Name[0]} [2]{monster.Name[1]} [3]{monster.Name[2]} [4]{monster.Name[3]} [5]{monster.Name[4]}");
+            Console.WriteLine(
+                $"[1]{monster.Name[0]} [2]{monster.Name[1]} [3]{monster.Name[2]} [4]{monster.Name[3]} [5]{monster.Name[4]}");
             string Anser = Console.ReadLine();
             if (Anser == "1")
             {
-
                 CheckMonsterIsDead(0);
             }
-            else if (Anser == "2" )
+            else if (Anser == "2")
             {
                 CheckMonsterIsDead(1);
             }
-            else if (Anser == "3" )
+            else if (Anser == "3")
             {
                 CheckMonsterIsDead(2);
             }
@@ -142,14 +145,14 @@ namespace Exercise4
             }
             else
             {
-                Console.WriteLine($"{monster.Name[number]}\n血量:{monster.Hp[number]}/{monster.HpMax[number]}\n掉落經驗值:{monster.Exp[number]}");
+                Console.WriteLine(
+                    $"{monster.Name[number]}\n血量:{monster.Hp[number]}/{monster.HpMax[number]}\n掉落經驗值:{monster.Exp[number]}");
                 player.attackTarget = number;
             }
         }
-        
-        public void NormalAttack() 
+
+        public void NormalAttack()
         {
-            
             if (player.attackTarget != -1)
             {
                 int dice = ram.Next(0, 20);
@@ -167,6 +170,7 @@ namespace Exercise4
                     Console.WriteLine("大成功，爆擊!!");
                     DealDamage(2 * (player.damage + dice));
                 }
+
                 if (monster.Hp[player.attackTarget] <= 0)
                 {
                     DefeatMonster(player.attackTarget);
@@ -178,7 +182,7 @@ namespace Exercise4
                 Console.WriteLine("請先選擇攻擊目標");
             }
         }
-        
+
         void DealDamage(int damage)
         {
             Console.WriteLine($"對{monster.Name[player.attackTarget]}造成了{damage}點傷害");
@@ -190,10 +194,11 @@ namespace Exercise4
             else
             {
                 monster.Hp[player.attackTarget] -= damage;
-                Console.WriteLine($"{monster.Name[player.attackTarget]}  血量:{monster.Hp[player.attackTarget]}/{monster.HpMax[player.attackTarget]}\n");
+                Console.WriteLine(
+                    $"{monster.Name[player.attackTarget]}  血量:{monster.Hp[player.attackTarget]}/{monster.HpMax[player.attackTarget]}\n");
             }
         }
-        
+
         public void DefeatMonster(int index)
         {
             Bag bag = new Bag();
@@ -205,13 +210,14 @@ namespace Exercise4
                 Console.WriteLine("恭喜!!獲得一個炸彈\n");
                 player.bag.AddToBag();
             }
+
             GainExperience(monster.Exp[index]);
         }
-        
+
         public void GainExperience(int exp)
         {
             player.Exp += exp;
-            if (player.Exp >=player.ExpMax)
+            if (player.Exp >= player.ExpMax)
             {
                 LevelUp();
             }
@@ -220,7 +226,7 @@ namespace Exercise4
                 Console.WriteLine($"\n獲得經驗值:{exp}\n經驗值:{player.Exp}/{player.ExpMax}");
             }
         }
-        
+
         void LevelUp()
         {
             player.level++;
@@ -232,7 +238,7 @@ namespace Exercise4
             player.ExpMax = player.level * 50 + player.ExpMax;
             player.ShowLevelUpState(2);
         }
-        
+
         public void UseBoom()
         {
             if (player.attackTarget == -1)
@@ -255,8 +261,5 @@ namespace Exercise4
                 Console.WriteLine("沒有炸彈可以使用");
             }
         }
-
-
-
     }
 }

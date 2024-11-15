@@ -20,6 +20,7 @@ namespace Exercise4
             Exp = new int[] { 100, 20, 30, 40, 50 };
             IsDead = new bool[] { false, false, false, false, false };
         }
+
         public string GetName(int posision)
         {
             return Name[posision];
@@ -31,27 +32,27 @@ namespace Exercise4
             string Anser = Console.ReadLine();
             if (Anser == "1" && IsDead[0])
             {
-                SetValue(_monster,0);
+                SetValue(_monster, 0);
                 return 0;
             }
             else if (Anser == "2" && IsDead[1])
             {
-                SetValue(_monster,1);
+                SetValue(_monster, 1);
                 return 1;
             }
             else if (Anser == "3" && IsDead[2])
             {
-                SetValue(_monster,2);
+                SetValue(_monster, 2);
                 return 2;
             }
             else if (Anser == "4" && IsDead[3])
             {
-                SetValue(_monster,3);
+                SetValue(_monster, 3);
                 return 3;
             }
             else if (Anser == "5" && IsDead[4])
             {
-                SetValue(_monster,4);
+                SetValue(_monster, 4);
                 return 4;
             }
             else
@@ -60,7 +61,8 @@ namespace Exercise4
                 return -1;
             }
         }
-        void SetValue(Monster _monster,int num)
+
+        void SetValue(Monster _monster, int num)
         {
             _monster.IsDead[num] = false;
             _monster.Hp[num] = _monster.HpMax[num];

@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Exercise4
 {
-    
-
     internal class PlayerAbility
     {
-
-        public enum pClass 
+        public enum pClass
         {
             warrior,
             ranger,
@@ -27,7 +24,8 @@ namespace Exercise4
         public int Int = 0;
         public int dex = 0;
         public int luk = 0;
-        public PlayerAbility(string _name,int _classNumber,int _str ,int _Int ,int _dex ,int _luk )
+
+        public PlayerAbility(string _name, int _classNumber, int _str, int _Int, int _dex, int _luk)
         {
             classNumber = _classNumber;
             str = _str;
@@ -35,7 +33,7 @@ namespace Exercise4
             dex = _dex;
             luk = _luk;
         }
-        
+
         public PlayerAbility(int _classNumber)
         {
             switch (_classNumber)
@@ -57,7 +55,6 @@ namespace Exercise4
 
         public PlayerAbility()
         {
-            
         }
 
 
@@ -70,6 +67,5 @@ namespace Exercise4
             dex = ClassAbilitySet.ClassDex[_classNumber];
             luk = ClassAbilitySet.ClassLuk[_classNumber];
         }
-        
     }
 }

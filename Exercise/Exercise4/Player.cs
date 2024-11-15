@@ -15,19 +15,20 @@ namespace Exercise4
         public string Name = null;
         public int level, Exp, ExpMax, attackTarget, damage;
         public bool isSetClass = false;
+
         public Player()
         {
             level = 1;
             Exp = 0;
             ExpMax = 150;
-            attackTarget = -1;            
+            attackTarget = -1;
         }
-        public  void ShowState(Bag _bag)
+
+        public void ShowState(Bag _bag)
         {
             ShowAbility();
             Console.WriteLine("\n背包");
             _bag.ShowBag();
-            
         }
 
         public void ShowLevelUpState(int puls)
@@ -45,6 +46,7 @@ namespace Exercise4
 
             Console.WriteLine($"\n經驗值{Exp}/{ExpMax}");
         }
+
         public void ShowAbility()
         {
             Console.WriteLine($"名稱:{Name}");
@@ -78,9 +80,9 @@ namespace Exercise4
                     break;
             }
         }
-        
 
-        public  void SetName()
+
+        public void SetName()
         {
             Console.WriteLine("歡迎來到地獄M\n請輸入您的姓名:");
             string Anser = Console.ReadLine();
@@ -89,18 +91,18 @@ namespace Exercise4
 
         public void SetClass()
         {
-            
             Console.WriteLine("請選擇職業");
             for (int i = 0; i < ClassAbilitySet.ClassName.Length; i++)
             {
-                Console.WriteLine($"[{i+1}] {ClassAbilitySet.ClassName[i]}");
+                Console.WriteLine($"[{i + 1}] {ClassAbilitySet.ClassName[i]}");
             }
+
             string Anser = Console.ReadLine();
             if (Anser == "1")
             {
                 ShowSelectClass(0);
                 Confirm(0);
-            }   
+            }
             else if (Anser == "2")
             {
                 ShowSelectClass(1);
@@ -135,7 +137,7 @@ namespace Exercise4
         private void Confirm(int _classNumber)
         {
             Console.WriteLine("確定要選擇這個職業嗎?(Y/N)");
-            bool sayYes= Menu.CheckYesOrNo();
+            bool sayYes = Menu.CheckYesOrNo();
             if (sayYes)
             {
                 CreatPlayerClass(_classNumber);
@@ -147,18 +149,5 @@ namespace Exercise4
         {
             ability = new PlayerAbility(_classNumber);
         }
-        
-        
-
-        
-        
-        
-        
-        
-
-        
-
-
-        
     }
 }

@@ -8,7 +8,6 @@ namespace Exercise4
 {
     internal class Bag
     {
-
         public int[] bag = new int[5] { 0, 0, 0, 0, 0 };
 
         public string GetItemName(int position)
@@ -26,11 +25,12 @@ namespace Exercise4
             {
                 return "空";
             }
-
         }
+
         public void ShowBag()
         {
-            Console.WriteLine($"||{GetItemName(0)}||{GetItemName(1)}||{GetItemName(2)}||{GetItemName(3)}||{GetItemName(4)}||");
+            Console.WriteLine(
+                $"||{GetItemName(0)}||{GetItemName(1)}||{GetItemName(2)}||{GetItemName(3)}||{GetItemName(4)}||");
         }
 
         public void AddToBag()
@@ -45,6 +45,7 @@ namespace Exercise4
                     break;
                 }
             }
+
             if (IsAdd == false)
             {
                 Console.WriteLine("背包已滿，炸彈已被丟棄");
@@ -61,8 +62,8 @@ namespace Exercise4
                     return true;
                 }
             }
+
             return false;
         }
-
     }
 }
