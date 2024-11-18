@@ -8,23 +8,32 @@ namespace Exercise5
 {
     internal class LogInSystem
     {
-        Dictionary<string, Player> playerData = new Dictionary<string, Player>();
-        
+        public static Dictionary<string, Player> playerData = new Dictionary<string, Player>();
+        public static bool isLoggedIn = false;
 
-        public void LogIn()
+        public static Player LogIn()
         {
-            
+            Console.WriteLine("歡迎來到<地獄M>");
+            Console.WriteLine("\n登入:");
             Console.WriteLine("請輸入玩家名稱");
             string input = Console.ReadLine();
-            playerData[input] = new Player();
-            for (int i = 0; playerData.Keys.Count > i; i++) 
-            {
-                if (input == playerData.Keys[i])
-                {
 
-                }
+            if (playerData.ContainsKey(input))
+            {
+                Console.WriteLine("登入成功");
+                Console.WriteLine($"玩家名稱:{input}");
+                isLoggedIn = true;
+                return playerData[input];
             }
-            
+            else
+            {
+                Console.WriteLine("創建成功");
+                Console.WriteLine($"玩家名稱:{input}");
+                Player player = new Player(input);
+                playerData.Add(input, player);
+                isLoggedIn = true;
+                return player;
+            }
         }
     }
 }

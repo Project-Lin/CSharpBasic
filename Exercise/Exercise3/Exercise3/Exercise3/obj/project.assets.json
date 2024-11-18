@@ -19,6 +19,7 @@
       "packagesPath": "C:\\Users\\s1120\\.nuget\\packages\\",
       "outputPath": "P:\\CSharpBasic\\Exercise\\Exercise3\\Exercise3\\Exercise3\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "C:\\Users\\s1120\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

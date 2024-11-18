@@ -9,9 +9,11 @@ namespace Exercise5
     internal class GameManager
     {
         private static GameManager isInstance = null;
-        public List<Player> playerList = new List<Player>();
+        //public static List<Player> playerList = new List<Player>();
+        public static Player player = new Player("null");
         int LogInPlayerID;
         public List<Mob> mobList = new List<Mob>();
+        bool isSetClass =false;
 
         private GameManager()
         {
@@ -29,9 +31,12 @@ namespace Exercise5
 
         public void InitializeGame()
         {
-            LogIn();
+            player = LogInSystem.LogIn();
+            while (!isSetClass)
+            {
+                
+            }
             loadSave();
-            
         }
 
         private void loadSave() 

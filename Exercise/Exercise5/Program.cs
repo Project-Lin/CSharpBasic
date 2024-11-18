@@ -5,9 +5,16 @@
         static void Main(string[] args)
         {
             GameManager gameManager = GameManager.Instance();
+            Menu menu = new Menu();
 
-            gameManager.InitializeGame();
-
+            while (true)
+            {
+                if (!LogInSystem.isLoggedIn)
+                {
+                    gameManager.InitializeGame();
+                }
+                menu.MainMenu();
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Exercise4
         {
             Hp = new int[] { 100, 200, 300, 400, 500, 600 };
             HpMax = new int[] { 100, 200, 300, 400, 500, 600 };
-            Exp = new int[] { 100, 20, 30, 40, 50 };
+            Exp = new int[] { 60, 70, 80, 90, 100 };
             IsDead = new bool[] { false, false, false, false, false };
         }
 

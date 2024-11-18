@@ -8,13 +8,19 @@ namespace Exercise5
 {
     internal class Player
     {
-        int id {  get; set; }
-        string name { get; set; }
+        public string name;
+        public int level,hp,hpMax,damage,exp,expMax;
+        public int str, dex, Int, luk;
 
 
-        private void SetName()
+        public Player(string _name)
         {
+            name = _name;
+        }
 
+        public void ShowInfo()
+        {
+            Console.WriteLine(name);
         }
     }
 }

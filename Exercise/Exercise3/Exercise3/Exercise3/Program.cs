@@ -18,7 +18,7 @@
         static string[] Class = new string[] { "戰士", "遊俠", "盜賊", "法師" };
         static string pName;
         static int pClass, pLevel, pStr, pInt, pDex, pLuk, pExp, pExpMax, attackTarget, pDamage;
-        static int[] bag = new int[5] { 0,0,0,0,0};
+        static int[] bag = new int[5] { 0, 0, 0, 0, 0 };
         static bool isQuit, isSetClass;
         static string Anser = null;
         static Random ram = new Random();
@@ -78,7 +78,8 @@
             pDex = dex;
             pLuk = luk;
             isSetClass = true;
-            Console.WriteLine($"{Class[classIndex]}:\n力量:{str}\n智力:{intel}\n敏捷:{dex}\n幸運:{luk}\n確定要選擇{Class[classIndex]}嗎?(Y/N)");
+            Console.WriteLine(
+                $"{Class[classIndex]}:\n力量:{str}\n智力:{intel}\n敏捷:{dex}\n幸運:{luk}\n確定要選擇{Class[classIndex]}嗎?(Y/N)");
             string input = Console.ReadLine();
             if (input == "y" || input == "Y")
             {
@@ -136,9 +137,11 @@
 
         static void DisplayPlayerStatus()
         {
-            Console.WriteLine($"名稱:{pName}\n職業:{Class[pClass]}\n等級:{pLevel}\n\n能力值\n力量:{pStr}\n智力:{pInt}\n敏捷:{pDex}\n幸運:{pLuk}\n\n經驗值:{pExp}/{pExpMax}");
+            Console.WriteLine(
+                $"名稱:{pName}\n職業:{Class[pClass]}\n等級:{pLevel}\n\n能力值\n力量:{pStr}\n智力:{pInt}\n敏捷:{pDex}\n幸運:{pLuk}\n\n經驗值:{pExp}/{pExpMax}");
             Console.WriteLine("背包");
-            Console.WriteLine($"||{GetItemName(0)}||{GetItemName(1)}||{GetItemName(2)}||{GetItemName(3)}||{GetItemName(4)}||");
+            Console.WriteLine(
+                $"||{GetItemName(0)}||{GetItemName(1)}||{GetItemName(2)}||{GetItemName(3)}||{GetItemName(4)}||");
         }
 
         static string GetItemName(int position)
@@ -156,7 +159,6 @@
             {
                 return "空";
             }
-
         }
 
         static void SelectAttackTarget()
@@ -214,6 +216,7 @@
                     Console.WriteLine("大成功，爆擊!!");
                     DealDamage(2 * (pDamage + dice));
                 }
+
                 if (mHp[attackTarget] <= 0)
                 {
                     DefeatMonster(attackTarget);
@@ -264,27 +267,28 @@
             Console.WriteLine($"已擊敗{mName[index]}\n");
             mIsDead[index] = true;
             int dice = ram.Next(0, 100);
-            if (dice < 100)
+            if (dice < 50)
             {
                 Console.WriteLine("恭喜!!獲得一個炸彈\n");
-                //bag[0] += 1;
                 AddToBag();
             }
+
             GainExperience(mExp[index]);
         }
 
         static void AddToBag()
         {
             bool IsAdd = false;
-            for (int i = 0;i<bag.Length;i++)
+            for (int i = 0; i < bag.Length; i++)
             {
-                if (bag[i] == 0&& IsAdd==false)
+                if (bag[i] == 0 && IsAdd == false)
                 {
                     bag[i] = 1;
                     IsAdd = true;
                     break;
                 }
             }
+
             if (IsAdd == false)
             {
                 Console.WriteLine("背包已滿，炸彈已被丟棄");
@@ -309,7 +313,8 @@
             pLevel++;
             pExp -= pExpMax;
             Console.WriteLine("升級!!");
-            Console.WriteLine($"名稱:{pName}\n職業:{Class[pClass]}\n等級:{pLevel}\n\n能力值\n力量:{pStr}+{pLevel}\n智力:{pInt}+{pLevel}\n敏捷:{pDex}+{pLevel}\n幸運:{pLuk}+{pLevel}\n\n經驗值:{pExp}/{pExpMax}");
+            Console.WriteLine(
+                $"名稱:{pName}\n職業:{Class[pClass]}\n等級:{pLevel}\n\n能力值\n力量:{pStr}+{pLevel}\n智力:{pInt}+{pLevel}\n敏捷:{pDex}+{pLevel}\n幸運:{pLuk}+{pLevel}\n\n經驗值:{pExp}/{pExpMax}");
             pStr += pLevel;
             pInt += pLevel;
             pLuk += pLevel;
@@ -382,7 +387,7 @@
 
         static bool CheckBoom()
         {
-            for (int i = 0; i<bag.Length; i++)
+            for (int i = 0; i < bag.Length; i++)
             {
                 if (bag[i] == 1)
                 {
