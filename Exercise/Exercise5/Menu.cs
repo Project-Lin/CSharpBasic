@@ -4,6 +4,7 @@ public class Menu
 {
     public void MainMenu()
     {
+        Console.WriteLine("\n<大廳>");
         Console.WriteLine("\n[1]選單 [2]顯示玩家狀態 [3]選擇地圖");
 
         ConsoleKeyInfo Anser = Console.ReadKey();
@@ -30,7 +31,7 @@ public class Menu
     public void OptionsMenu()
     {
         Console.WriteLine("\n< 選單 >");
-        Console.WriteLine("[1]登出 [2]離開遊戲");
+        Console.WriteLine("[1]登出 [2]離開遊戲 [3]返回大廳");
         
         ConsoleKeyInfo Anser = Console.ReadKey();
         if (Anser.Key == ConsoleKey.D1)
@@ -43,6 +44,10 @@ public class Menu
         else if (Anser.Key == ConsoleKey.D2)
         {
             Console.WriteLine("\n確定要離開遊戲嗎?(Y/N)");
+        }
+        else if (Anser.Key == ConsoleKey.D3)
+        {
+            MainMenu();
         }
 
         else

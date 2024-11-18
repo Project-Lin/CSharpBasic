@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Exercise5
+﻿namespace Exercise5
 {
     internal class GameManager
     {
@@ -13,7 +7,7 @@ namespace Exercise5
         public static Player player = new Player("null");
         int LogInPlayerID;
         public List<Mob> mobList = new List<Mob>();
-        bool isSetClass =false;
+        bool isSetClass = false;
 
         private GameManager()
         {
@@ -32,17 +26,21 @@ namespace Exercise5
         public void InitializeGame()
         {
             player = LogInSystem.LogIn();
-            while (!isSetClass)
+            if(player.playerClass == null)
             {
-                
+                while (!isSetClass)
+                {
+
+                }
             }
+            
             loadSave();
         }
 
-        private void loadSave() 
+        private void loadSave()
         {
-            
+
         }
-        
+
     }
 }

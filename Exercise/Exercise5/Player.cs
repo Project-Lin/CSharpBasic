@@ -11,6 +11,7 @@ namespace Exercise5
         public string name;
         public int level,hp,hpMax,damage,exp,expMax;
         public int str, dex, Int, luk;
+        public PlayerClass playerClass = null;
 
 
         public Player(string _name)
@@ -22,5 +23,6 @@ namespace Exercise5
         {
             Console.WriteLine(name);
         }
+
     }
 }

@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\loginsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:loginsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:statistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|c:\\c_sharp\\csharpbasic\\exercise\\exercise5\\mob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF696C8B-FDD5-4B8D-8BD5-2468D26E44C4}|Exercise5.csproj|solutionrelative:mob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,26 +42,91 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Player.cs",
+              "RelativeDocumentMoniker": "Player.cs",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Player.cs",
+              "RelativeToolTip": "Player.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA5wAwAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T02:05:54.02Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Menu.cs",
+              "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Menu.cs",
+              "RelativeDocumentMoniker": "Menu.cs",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Menu.cs",
+              "RelativeToolTip": "Menu.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA8wAcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T10:05:37.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Statistics.cs",
+              "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Statistics.cs",
+              "RelativeDocumentMoniker": "Statistics.cs",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Statistics.cs",
+              "RelativeToolTip": "Statistics.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T06:40:24.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LogInSystem.cs",
+              "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\LogInSystem.cs",
+              "RelativeDocumentMoniker": "LogInSystem.cs",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\LogInSystem.cs",
+              "RelativeToolTip": "LogInSystem.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA8wAoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T06:38:28.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Mob.cs",
+              "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Mob.cs",
+              "RelativeDocumentMoniker": "Mob.cs",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Mob.cs",
+              "RelativeToolTip": "Mob.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-16T02:07:06.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\GameManager.cs",
               "RelativeDocumentMoniker": "GameManager.cs",
-              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\GameManager.cs*",
-              "RelativeToolTip": "GameManager.cs*",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBcAAAAeAAAAAAAAAA==",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\GameManager.cs",
+              "RelativeToolTip": "GameManager.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA1wAYAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T01:59:57.632Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Program.cs*",
-              "RelativeToolTip": "Program.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAjAAAAAAAAAA==",
+              "ToolTip": "C:\\C_Sharp\\CSharpBasic\\Exercise\\Exercise5\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAABEwAwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T01:54:57.343Z",
               "EditorCaption": ""
