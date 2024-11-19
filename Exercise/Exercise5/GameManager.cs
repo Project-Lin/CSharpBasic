@@ -3,6 +3,8 @@
     internal class GameManager
     {
         private static GameManager isInstance = null;
+        public Menu menu = new Menu();
+
         //public static List<Player> playerList = new List<Player>();
         public static Player player = new Player("null");
         int LogInPlayerID;
@@ -26,21 +28,23 @@
         public void InitializeGame()
         {
             player = LogInSystem.LogIn();
-            if(player.playerClass == null)
-            {
-                while (!isSetClass)
-                {
 
-                }
+            while (player.playerClass == null)
+            {
+                player.SetPlayerClass();
+                menu.SettingClassMenu(player.playerClass);
+                
             }
-            
-            loadSave();
+
+        }
+
+        public void StartGame()
+        {
+            menu.MainMenu();
         }
 
         private void loadSave()
         {
-
         }
-
     }
 }

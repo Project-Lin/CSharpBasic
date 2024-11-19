@@ -13,7 +13,7 @@
                 {
                     gameManager.InitializeGame();
                 }
-                menu.MainMenu();
+                gameManager.StartGame();
             }
         }
     }
