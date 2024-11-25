@@ -2,25 +2,39 @@
 
 public class ExploreSystem
 {
-     private int currentLevel = 1;
+     public static int currentLevel = 1;
      public  List<Mob> mobToFightList = new List<Mob>();
      Random ram = new Random();
      Mob targetMob = new Mob();
      Mob mob = new Mob();
      Menu menu = new Menu();
      public static int target = -1;
+     public static bool isCrateFightList = false;
+     public static bool isCompleteTheLevel = false;
+     
 
     public  void Fight()
     {
-        CreateFightList();
+        if (!isCrateFightList)
+        {
+            CreateFightList();
+            isCrateFightList = true;
+        }
+        
         bool hasTarget =false;
         while (!hasTarget)
         {
             target = menu.FightMenu(mobToFightList);
+            
             if (target >= 0)
             {
                 hasTarget = true;
             }
+            else
+            {
+                hasTarget = false;
+            }
+            
         }
         
         while (target != -1)
@@ -41,6 +55,7 @@ public class ExploreSystem
                     
                     break;
                 case 3:
+                    target = -1;
                     menu.FightMenu(mobToFightList);
                     break;
                 
@@ -112,12 +127,12 @@ public class ExploreSystem
         int damage = 0;
         if (dice == 1)
         {
-            Console.WriteLine("大失敗");
+            Console.WriteLine("\n大失敗");
             damage = 1;
         }
         else if (dice == 20)
         {
-            Console.WriteLine("大成功");
+            Console.WriteLine("\n大成功");
             damage = GameManager.player.damage * 2;
         }
         else
@@ -127,7 +142,7 @@ public class ExploreSystem
         
         if (damage <= targetMob.Hp)
         {
-            Console.WriteLine($"對{targetMob.Name}造成{damage}點傷害");
+            Console.WriteLine($"\n對{targetMob.Name}造成{damage}點傷害");
             targetMob.Hp-=damage;
         }
         else
@@ -137,10 +152,35 @@ public class ExploreSystem
 
         if (targetMob.Hp == 0)
         {
-            Console.WriteLine("目標已死亡");
+            Console.WriteLine("\n目標已死亡");
+            Console.WriteLine($"獲得{targetMob.Exp}點經驗值");
+            
+            if (GameManager.player.exp + targetMob.Exp >= GameManager.player.expMax)
+            {
+                int extraExp = GameManager.player.exp + targetMob.Exp - GameManager.player.expMax;
+                GameManager.player.LevelUp(extraExp);
+            }
+            else
+            {
+                GameManager.player.exp += targetMob.Exp;
+                Console.WriteLine($"經驗值:{GameManager.player.exp}/{GameManager.player.expMax}");
+            }
+            
             mobToFightList.Remove(targetMob);
-            menu.FightMenu(mobToFightList);
-            //target = -1;
+            if (mobToFightList.Count == 0)
+            {
+                Console.WriteLine("\n以殲滅所有敵人，進入下一關");
+                currentLevel++;
+                target = -1;
+                isCompleteTheLevel = true;
+                isCrateFightList = false;
+                //GameManager.startExplore = false;
+            }
+            else
+            {
+                menu.FightMenu(mobToFightList);
+            }
+            
         }
     }
     

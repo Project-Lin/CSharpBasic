@@ -188,6 +188,7 @@ public class Menu
 
     public int FightMenu(List<Mob> mobList)
     {
+        Console.WriteLine($"\n關卡{ExploreSystem.currentLevel}:");
         Console.WriteLine($"<遭遇戰>");
         Console.WriteLine("\n敵人:");
         if (mobList.Count == 0)
@@ -214,6 +215,7 @@ public class Menu
                 }
                 else
                 {
+                    selectedMob = -1;
                     isSelected = false;
                     break;
                 }
@@ -227,6 +229,7 @@ public class Menu
                 }
                 else
                 {
+                    selectedMob = -1;
                     isSelected = false;
                     break;
                 }
@@ -240,6 +243,7 @@ public class Menu
                 }
                 else
                 {
+                    selectedMob = -1;
                     isSelected = false;
                     break;
                 }
@@ -253,6 +257,7 @@ public class Menu
                 }
                 else
                 {
+                    selectedMob = -1;
                     isSelected = false;
                     break;
                 }
@@ -266,6 +271,7 @@ public class Menu
                 }
                 else
                 {
+                    selectedMob = -1;
                     isSelected = false;
                     break;
                 }

@@ -28,6 +28,7 @@ namespace Exercise5
                 playerData.Add(input, player);
                 isLoggedIn = true;
                 return player;
+                
             }
         }
     }

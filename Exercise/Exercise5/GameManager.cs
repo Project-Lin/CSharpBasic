@@ -46,7 +46,13 @@
                 {
                     menu.MainMenu();
                 }
-                StartExplore();
+
+                ExploreSystem.isCompleteTheLevel = false;
+                while (!ExploreSystem.isCompleteTheLevel)
+                {
+                    StartExplore();
+                }
+                
             }
             
         }
