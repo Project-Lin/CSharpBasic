@@ -80,7 +80,7 @@ public class Menu
         {
             if (CheckSelect("前往荒野"))
             {
-                
+                WildMenu();
             }
             else
             {
@@ -108,7 +108,6 @@ public class Menu
         {
             if (CheckSelect("選擇商人"))
             {
-                
             }
             else
             {
@@ -119,7 +118,6 @@ public class Menu
         {
             if (CheckSelect("選擇武器匠"))
             {
-                
             }
             else
             {
@@ -130,7 +128,6 @@ public class Menu
         {
             if (CheckSelect("選擇武器匠"))
             {
-                
             }
             else
             {
@@ -148,6 +145,7 @@ public class Menu
         }
     }
 
+    //TODO 探索系統
     public void WildMenu()
     {
         Console.WriteLine("\n< 荒野 >");
@@ -158,7 +156,7 @@ public class Menu
         {
             if (CheckSelect("往前探索"))
             {
-                
+                GameManager.startExplore = true;
             }
             else
             {
@@ -176,7 +174,7 @@ public class Menu
                 WildMenu();
             }
         }
-        
+
         else if (Anser.Key == ConsoleKey.D4)
         {
             WildMenu();
@@ -188,29 +186,106 @@ public class Menu
         }
     }
 
-    public void FlightMenu()
+    public int FightMenu(List<Mob> mobList)
     {
-        if (Console.KeyAvailable)
+        Console.WriteLine($"<遭遇戰>");
+        Console.WriteLine("\n敵人:");
+        if (mobList.Count == 0)
+        {
+            return -1;
+        }
+        for (int i = 0; i < mobList.Count; i++)
+        {
+            Console.WriteLine($"[{i + 1}] {mobList[i].Name} ");
+        }
+
+        bool isSelected = false;
+        int selectedMob = -1;
+        while (!isSelected)
         {
             ConsoleKeyInfo Anser = Console.ReadKey();
-            if (Anser.Key == ConsoleKey.D1)
+
+            if (Anser.Key == ConsoleKey.D1 && mobList.Count >= 1)
             {
-                //選擇目標(列出目標)
+                if (CheckSelect($"選擇{mobList[0].Name}"))
+                {
+                    selectedMob = 0;
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                    break;
+                }
             }
-            else if (Anser.Key == ConsoleKey.D2)
+            else if (Anser.Key == ConsoleKey.D2 && mobList.Count >= 2)
             {
-                //往前探索
+                if (CheckSelect($"選擇{mobList[1].Name}"))
+                {
+                    selectedMob = 1;
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                    break;
+                }
             }
-            else if (Anser.Key == ConsoleKey.D3)
+            else if (Anser.Key == ConsoleKey.D3 && mobList.Count >= 3)
             {
-                //返回大廳
+                if (CheckSelect($"選擇{mobList[2].Name}"))
+                {
+                    selectedMob = 2;
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                    break;
+                }
+            }
+            else if (Anser.Key == ConsoleKey.D4 && mobList.Count >= 4)
+            {
+                if (CheckSelect($"選擇{mobList[3].Name}"))
+                {
+                    selectedMob = 3;
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                    break;
+                }
+            }
+            else if (Anser.Key == ConsoleKey.D5 && mobList.Count >= 5)
+            {
+                if (CheckSelect($"選擇{mobList[4].Name}"))
+                {
+                    selectedMob = 4;
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                    break;
+                }
             }
             else
             {
-                Console.WriteLine("請輸入正確指令");
+                Console.WriteLine("\n請輸入正確指令");
+                break;
             }
         }
+
+        return selectedMob;
     }
+
+    // private void ShowMobInfo(int number, List<Mob> mobList)
+    // {
+    //     Console.WriteLine($"{mobList[number].Name}");
+    //     Console.WriteLine($"{mobList[number].Hp}/{mobList[number].MaxHp}");
+    //     Console.WriteLine($"{mobList[number].Exp}");
+    // }
 
     private static bool CheckSelect(string DoWhat)
     {
@@ -296,6 +371,40 @@ public class Menu
             {
                 Console.WriteLine("\n請輸入正確指令");
             }
+        }
+    }
+
+    public static int MobMenu()
+    {
+        Console.WriteLine("\n< 戰鬥 >");
+        Console.WriteLine("[1]攻擊 [2]使用道具 [3]逃跑");
+
+        ConsoleKeyInfo Anser = Console.ReadKey();
+        if (Anser.Key == ConsoleKey.D1)
+        {
+            return 1;
+        }
+        else if (Anser.Key == ConsoleKey.D2)
+        {
+            return 2;
+        }
+
+        else if (Anser.Key == ConsoleKey.D3)
+        {
+            if (CheckSelect("逃跑"))
+            {
+                return 3;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        else
+        {
+            Console.WriteLine("\n請輸入正確指令");
+            return 0;
         }
     }
 }

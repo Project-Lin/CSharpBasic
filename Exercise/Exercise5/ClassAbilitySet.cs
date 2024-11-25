@@ -1,4 +1,4 @@
-﻿namespace Exercise4
+﻿namespace Exercise5
 {
     internal class ClassAbilitySet
     {

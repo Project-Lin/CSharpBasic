@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-
+﻿
 namespace Exercise5
 {
     internal class Player
     {
         public string name;
         public int level,hp,hpMax,exp,expMax;
+        //TODO 計算攻擊傷害
         public int damage { get; set; }
         public PlayerClass playerClass = null;
 
@@ -42,6 +37,24 @@ namespace Exercise5
             playerClass = _playerClass;
         }
         
+        public void CalculateDamage()
+        {
+            switch (playerClass.number)
+            {
+                case 0:
+                    damage = 10 * playerClass.str + 2 * playerClass.Int + 3 * playerClass.dex + 2 * playerClass.luk;
+                    break;
+                case 1:
+                    damage = 3 * playerClass.str + 2 * playerClass.Int + 7 * playerClass.dex + 2 * playerClass.luk;
+                    break;
+                case 2:
+                    damage = 4 * playerClass.str + 2 * playerClass.Int + 3 * playerClass.dex + 6 * playerClass.luk;
+                    break;
+                case 3:
+                    damage = 1 * playerClass.str + 10 * playerClass.Int + 1 * playerClass.dex + 1 * playerClass.luk;
+                    break;
+            }
+        }
 
     }
 }

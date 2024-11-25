@@ -4,12 +4,12 @@
     {
         private static GameManager isInstance = null;
         public Menu menu = new Menu();
-
-        //public static List<Player> playerList = new List<Player>();
         public static Player player = new Player("null");
         int LogInPlayerID;
         public List<Mob> mobList = new List<Mob>();
         bool isSetClass = false;
+        private ExploreSystem exploreSystem = new ExploreSystem();
+        public static bool startExplore = false;
 
         private GameManager()
         {
@@ -40,11 +40,22 @@
 
         public void StartGame()
         {
-            menu.MainMenu();
+            while (true)
+            {
+                while (!startExplore)
+                {
+                    menu.MainMenu();
+                }
+                StartExplore();
+            }
+            
         }
 
-        private void loadSave()
+        private void StartExplore()
         {
+            player.CalculateDamage();
+            exploreSystem.CreateScenes();
+            
         }
     }
 }

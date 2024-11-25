@@ -1,11 +1,10 @@
-﻿using Exercise4;
-
-namespace Exercise5;
+﻿namespace Exercise5;
 
 public class PlayerClass
 {
     public string name;
     public int str, Int, dex, luk;
+    public int number;
 
     public enum pClass
     {
@@ -21,6 +20,7 @@ public class PlayerClass
         {
             case pClass.warrior:
                 name = $"{ClassAbilitySet.WorriorName}";
+                number = 0;
                 str = ClassAbilitySet.WorriorStr;
                 Int = ClassAbilitySet.WorriorInt;
                 dex = ClassAbilitySet.WorriorDex;
@@ -28,6 +28,7 @@ public class PlayerClass
                 break;
             case pClass.ranger:
                 name = $"{ClassAbilitySet.RangerName}";
+                number = 1;
                 str = ClassAbilitySet.RangerStr;
                 Int = ClassAbilitySet.RangerInt;
                 dex = ClassAbilitySet.RangerDex;
@@ -35,6 +36,7 @@ public class PlayerClass
                 break;
             case pClass.thief:
                 name = $"{ClassAbilitySet.ThiefName}";
+                number = 2;
                 str = ClassAbilitySet.ThiefStr;
                 Int = ClassAbilitySet.ThiefInt;
                 dex = ClassAbilitySet.ThiefDex;
@@ -42,6 +44,7 @@ public class PlayerClass
                 break;
             case pClass.mage:
                 name = $"{ClassAbilitySet.MageName}";
+                number = 3;
                 str = ClassAbilitySet.MageStr;
                 Int = ClassAbilitySet.MageInt;
                 dex = ClassAbilitySet.MageDex;
