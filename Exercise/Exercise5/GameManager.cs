@@ -8,7 +8,7 @@
         int LogInPlayerID;
         public List<Mob> mobList = new List<Mob>();
         bool isSetClass = false;
-        private ExploreSystem exploreSystem = new ExploreSystem();
+        public ExploreSystem exploreSystem = new ExploreSystem();
         public static bool startExplore = false;
 
         private GameManager()
@@ -42,6 +42,11 @@
         {
             while (true)
             {
+                if (!LogInSystem.isLoggedIn || player == null)
+                {
+                    return;
+                }
+
                 while (!startExplore)
                 {
                     menu.MainMenu();
@@ -52,13 +57,13 @@
                 {
                     StartExplore();
                 }
-                
             }
-            
         }
 
         private void StartExplore()
         {
+            if (player == null) return;
+            
             player.CalculateDamage();
             exploreSystem.CreateScenes();
             

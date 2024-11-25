@@ -5,7 +5,7 @@ public class Menu
     public void MainMenu()
     {
         Console.WriteLine("\n<大廳>");
-        Console.WriteLine("\n[1]選單 [2]顯示玩家狀態 [3]選擇地圖");
+        Console.WriteLine("\n[1]選單 [2]顯示玩家狀態 [3]查看背包 [4]選擇地圖");
 
         ConsoleKeyInfo Anser = Console.ReadKey();
         if (Anser.Key == ConsoleKey.D1)
@@ -17,6 +17,12 @@ public class Menu
             GameManager.player.ShowInfo();
         }
         else if (Anser.Key == ConsoleKey.D3)
+        {
+            GameManager.player.ShowInventory();
+            Console.WriteLine("\n按任意鍵返回大廳...");
+            Console.ReadKey();
+        }
+        else if (Anser.Key == ConsoleKey.D4)
         {
             MapMenu();
         }
@@ -36,12 +42,14 @@ public class Menu
         {
             if (CheckSelect("登出"))
             {
+                LogInSystem.SaveGame();
                 GameManager.player = null;
                 LogInSystem.isLoggedIn = false;
-            }
-            else
-            {
-                OptionsMenu();
+                ExploreSystem.currentLevel = 1;
+                GameManager.startExplore = false;
+                ExploreSystem.isCompleteTheLevel = false;
+                ExploreSystem.isCrateFightList = false;
+                return;
             }
         }
         else if (Anser.Key == ConsoleKey.D2)
@@ -392,9 +400,10 @@ public class Menu
         }
         else if (Anser.Key == ConsoleKey.D2)
         {
-            return 2;
+            Menu menu = new Menu();
+            menu.UseItem();
+            return 0;
         }
-
         else if (Anser.Key == ConsoleKey.D3)
         {
             if (CheckSelect("逃跑"))
@@ -406,11 +415,57 @@ public class Menu
                 return 0;
             }
         }
-
         else
         {
             Console.WriteLine("\n請輸入正確指令");
             return 0;
+        }
+    }
+
+    public void UseItem()
+    {
+        Console.WriteLine("\n使用道具:");
+        
+        // 顯示藥水和炸彈
+        var usableItems = GameManager.player.Inventory
+            .Where(i => (i.Key.Type == Item.ItemType.Potion || 
+                        (i.Key is Bomb)) && 
+                        i.Value > 0)
+            .ToList();
+        
+        if (usableItems.Count == 0)
+        {
+            Console.WriteLine("沒有可使用的道具!");
+            return;
+        }
+
+        for (int i = 0; i < usableItems.Count; i++)
+        {
+            var item = usableItems[i];
+            if (item.Key is Potion potion)
+            {
+                Console.WriteLine($"[{i + 1}] {item.Key.Name} x{item.Value} ({potion.HealAmount}HP)");
+            }
+            else if (item.Key is Bomb)
+            {
+                Console.WriteLine($"[{i + 1}] {item.Key.Name} x{item.Value} (造成{GameManager.player.damage * 2}傷害)");
+            }
+        }
+        
+        Console.WriteLine("[0] 返回");
+        
+        ConsoleKeyInfo answer = Console.ReadKey();
+        if (answer.KeyChar == '0') return;
+        
+        int selection;
+        if (int.TryParse(answer.KeyChar.ToString(), out selection) && 
+            selection > 0 && selection <= usableItems.Count)
+        {
+            GameManager.player.UseItem(usableItems[selection - 1].Key);
+        }
+        else
+        {
+            Console.WriteLine("\n無效的選擇");
         }
     }
 }

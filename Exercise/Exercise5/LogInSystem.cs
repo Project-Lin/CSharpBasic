@@ -1,10 +1,14 @@
-﻿
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
 namespace Exercise5
 {
     internal class LogInSystem
     {
         public static Dictionary<string, Player> playerData = new Dictionary<string, Player>();
         public static bool isLoggedIn = false;
+        private static string saveFilePath = "playerData.json";
 
         public static Player LogIn()
         {
@@ -30,6 +34,28 @@ namespace Exercise5
                 return player;
                 
             }
+        }
+
+        public static void SaveGame()
+        {
+            var saveData = new Dictionary<string, object>();
+            foreach (var player in playerData)
+            {
+                saveData[player.Key] = new {
+                    Name = player.Value.name,
+                    Level = player.Value.level,
+                    Class = player.Value.playerClass.number,
+                    Hp = player.Value.hp,
+                    Exp = player.Value.exp,
+                    Gold = player.Value.Gold,
+                    Inventory = player.Value.Inventory.Select(i => new {
+                        ItemName = i.Key.Name,
+                        Count = i.Value
+                    }).ToList()
+                };
+            }
+            
+            File.WriteAllText(saveFilePath, JsonSerializer.Serialize(saveData));
         }
     }
 }
