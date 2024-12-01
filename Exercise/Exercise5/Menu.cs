@@ -42,7 +42,6 @@ public class Menu
         {
             if (CheckSelect("登出"))
             {
-                LogInSystem.SaveGame();
                 GameManager.player = null;
                 LogInSystem.isLoggedIn = false;
                 ExploreSystem.currentLevel = ExploreSystem.currentLevel;
@@ -119,6 +118,9 @@ public class Menu
         {
             if (CheckSelect("選擇商人"))
             {
+                Villager merchant = new Villager(Villager.VillagerType.Merchant);
+                merchant.Talk();
+                VillageMenu();
             }
             else
             {
@@ -129,6 +131,9 @@ public class Menu
         {
             if (CheckSelect("選擇武器匠"))
             {
+                Villager blacksmith = new Villager(Villager.VillagerType.Blacksmith);
+                blacksmith.Talk();
+                VillageMenu();
             }
             else
             {
@@ -137,8 +142,11 @@ public class Menu
         }
         else if (Anser.Key == ConsoleKey.D3)
         {
-            if (CheckSelect("選擇武器匠"))
+            if (CheckSelect("選擇煉金術士"))
             {
+                Villager alchemist = new Villager(Villager.VillagerType.Alchemist);
+                alchemist.Talk();
+                VillageMenu();
             }
             else
             {
@@ -149,7 +157,6 @@ public class Menu
         {
             MapMenu();
         }
-
         else
         {
             Console.WriteLine("\n請輸入正確指令");
@@ -206,6 +213,7 @@ public class Menu
         {
             return -1;
         }
+
         for (int i = 0; i < mobList.Count; i++)
         {
             Console.WriteLine($"[{i + 1}] {mobList[i].Name} ");
@@ -296,13 +304,6 @@ public class Menu
 
         return selectedMob;
     }
-
-    // private void ShowMobInfo(int number, List<Mob> mobList)
-    // {
-    //     Console.WriteLine($"{mobList[number].Name}");
-    //     Console.WriteLine($"{mobList[number].Hp}/{mobList[number].MaxHp}");
-    //     Console.WriteLine($"{mobList[number].Exp}");
-    // }
 
     private static bool CheckSelect(string DoWhat)
     {
@@ -428,14 +429,14 @@ public class Menu
     public void UseItem()
     {
         Console.WriteLine("\n使用道具:");
-        
+
         // 顯示藥水和炸彈
         var usableItems = GameManager.player.Inventory
-            .Where(i => (i.Key.Type == Item.ItemType.Potion || 
-                        (i.Key is Bomb)) && 
+            .Where(i => (i.Key.Type == Item.ItemType.Potion ||
+                         (i.Key is Bomb)) &&
                         i.Value > 0)
             .ToList();
-        
+
         if (usableItems.Count == 0)
         {
             Console.WriteLine("沒有可使用的道具!");
@@ -449,19 +450,20 @@ public class Menu
             {
                 Console.WriteLine($"[{i + 1}] {item.Key.Name} x{item.Value} ({potion.HealAmount}HP)");
             }
-            else if (item.Key is Bomb)
+            else if (item.Key is Bomb bomb)
             {
-                Console.WriteLine($"[{i + 1}] {item.Key.Name} x{item.Value} (造成{GameManager.player.damage * 2}傷害)");
+                int damage = (int)(GameManager.player.damage * bomb.DamageMultiplier);
+                Console.WriteLine($"[{i + 1}] {item.Key.Name} x{item.Value} (造成{damage}傷害)");
             }
         }
-        
+
         Console.WriteLine("[0] 返回");
-        
+
         ConsoleKeyInfo answer = Console.ReadKey();
         if (answer.KeyChar == '0') return;
-        
+
         int selection;
-        if (int.TryParse(answer.KeyChar.ToString(), out selection) && 
+        if (int.TryParse(answer.KeyChar.ToString(), out selection) &&
             selection > 0 && selection <= usableItems.Count)
         {
             GameManager.player.UseItem(usableItems[selection - 1].Key);

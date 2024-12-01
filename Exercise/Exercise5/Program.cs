@@ -13,6 +13,7 @@
                 {
                     gameManager.InitializeGame();
                 }
+
                 gameManager.StartGame();
             }
         }

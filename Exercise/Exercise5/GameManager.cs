@@ -33,20 +33,13 @@
             {
                 player.SetPlayerClass();
                 menu.SettingClassMenu(player.playerClass);
-                
             }
-
         }
 
         public void StartGame()
         {
             while (LogInSystem.isLoggedIn && player != null)
             {
-                // if (!LogInSystem.isLoggedIn || player == null)
-                // {
-                //     return;
-                // }
-
                 while (!startExplore && LogInSystem.isLoggedIn)
                 {
                     menu.MainMenu();
@@ -63,10 +56,9 @@
         private void StartExplore()
         {
             if (player == null) return;
-            
+
             player.CalculateDamage();
             exploreSystem.CreateScenes();
-            
         }
     }
 }

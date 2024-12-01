@@ -18,13 +18,13 @@ public class ExploreSystem
         new Potion("中藥水", 100, 60) { Description = "恢復60點HP的藥水" },
         new Bomb("小型炸彈", 100) { Description = "對所有敵人造成雙倍攻擊力的傷害" },
     };
-    
+
     private List<Item> rareTreasures = new List<Item>()
     {
         new Potion("超級藥水", 300, 150) { Description = "恢復150點HP的藥水" },
         new Bomb("超級炸彈", 300) { Description = "對所有敵人造成雙倍攻擊力的傷害" },
     };
-    
+
     public void StartExplore()
     {
         Console.WriteLine($"\n=== 當前位置：荒野 第{currentLevel}層 ===");
@@ -35,36 +35,36 @@ public class ExploreSystem
     {
         currentMobs.Clear();
         int sceneType = ram.Next(0, 10);
-        
+
         switch (sceneType)
         {
-            case < 6: 
+            case < 6:
                 Console.WriteLine("\n遭遇敵人!");
                 CreateFightList();
                 Fight();
                 break;
-                
-            case < 8: 
+
+            case < 8:
                 HandleEvent();
                 break;
-                
+
             default:
                 HandleTreasure();
                 break;
         }
     }
-    
+
     private void CreateFightList()
     {
         mobToFightList.Clear();
-        int mobCount = ram.Next(1, Math.Min(currentLevel + 1, 5)); 
-        
+        int mobCount = ram.Next(1, Math.Min(currentLevel + 1, 5));
+
         for (int i = 0; i < mobCount; i++)
         {
             Mob.MobType type = GetRandomMobType();
             mobToFightList.Add(new Mob(type, currentLevel));
         }
-        
+
         currentMobs = mobToFightList;
         isCrateFightList = true;
     }
@@ -80,10 +80,11 @@ public class ExploreSystem
         if (currentLevel >= 3 && dice < 30)
         {
             return Mob.MobType.pig;
-        }     
-        return dice < 60 ? Mob.MobType.slime : Mob.MobType.goblin;       
+        }
+
+        return dice < 60 ? Mob.MobType.slime : Mob.MobType.goblin;
     }
-    
+
     private void HandleEvent()
     {
         int eventType = ram.Next(0, 3);
@@ -99,6 +100,9 @@ public class ExploreSystem
                 HandleMerchant();
                 break;
         }
+
+        Console.WriteLine($"\n已完成第{currentLevel}層!");
+        currentLevel++;
         ShowNextLevelMenu();
         isCompleteTheLevel = true;
     }
@@ -132,24 +136,33 @@ public class ExploreSystem
     private void HandleTreasure()
     {
         Console.WriteLine("\n發現寶箱!");
-        bool isRare = ram.Next(0, 100) < 20; 
-        
+        bool isRare = ram.Next(0, 100) < 20;
+
         var treasureList = isRare ? rareTreasures : commonTreasures;
         var treasure = treasureList[ram.Next(treasureList.Count)];
-        
+
         GameManager.player.AddItem(treasure);
         Console.WriteLine($"獲得了 {treasure.Name}!");
         Console.WriteLine($"描述: {treasure.Description}");
-        
+
+        Console.WriteLine($"\n已完成第{currentLevel}層!");
+        currentLevel++;
         ShowNextLevelMenu();
         isCompleteTheLevel = true;
     }
-    
+
     private void HandleBattleReward(Mob mob)
     {
         Console.WriteLine($"\n擊敗了 {mob.Name}!");
+
+        // 獲得金幣
+        int goldDrop = mob.GetGoldDrop();
+        GameManager.player.Gold += goldDrop;
+        Console.WriteLine($"獲得 {goldDrop} 金幣");
+
+        // 獲得經驗值
         Console.WriteLine($"獲得 {mob.Exp} 點經驗值");
-        
+
         if (GameManager.player.exp + mob.Exp >= GameManager.player.expMax)
         {
             int extraExp = GameManager.player.exp + mob.Exp - GameManager.player.expMax;
@@ -160,14 +173,15 @@ public class ExploreSystem
             GameManager.player.exp += mob.Exp;
             Console.WriteLine($"經驗值: {GameManager.player.exp}/{GameManager.player.expMax}");
         }
-        
-        if (ram.Next(0, 100) < 30) 
-        {
-            var drop = commonTreasures[ram.Next(commonTreasures.Count)];
-            GameManager.player.AddItem(drop);
-        }
 
-        ShowNextLevelMenu();
+        // 檢查是否所有怪物都被擊敗
+        if (mobToFightList.Count == 0)
+        {
+            Console.WriteLine($"\n已完成第{currentLevel}層!");
+            currentLevel++;
+            ShowNextLevelMenu();
+            isCompleteTheLevel = true;
+        }
     }
 
     public void Fight()
@@ -177,80 +191,73 @@ public class ExploreSystem
             CreateFightList();
             isCrateFightList = true;
         }
-        
-        
-        if (mobToFightList.Count == 0)
+
+        while (mobToFightList.Count > 0 && !isCompleteTheLevel)
         {
-            Console.WriteLine("\n沒有可戰鬥的怪物!");
-            isCompleteTheLevel = true;
-            return;
-        }
-        
-        
-        target = menu.FightMenu(mobToFightList);
-        while (target < 0 || target >= mobToFightList.Count)
-        {
-            Console.WriteLine("\n請選擇有效的目標!");
             target = menu.FightMenu(mobToFightList);
-        }
-        
-        while (mobToFightList.Count > 0)
-        {
+            if (target == -1) continue;
+
             targetMob = mobToFightList[target];
             targetMob.ShowInfo();
-            
-            switch (targetMob.OnSelect())
+
+            while (targetMob.Hp > 0 && !isCompleteTheLevel)
             {
-                case 0:
-                    Menu.MobMenu();
-                    break;
-                case 1:
-                    Attack();
-                    if (isCompleteTheLevel) return; 
-                    continue;
-                case 2:
-                    if (targetMob.Hp > 0)
-                    {
-                        if (GameManager.player.TakeDamage(targetMob.Attack))
+                switch (targetMob.OnSelect())
+                {
+                    case 0:
+                        Menu.MobMenu();
+                        break;
+                    case 1:
+                        Attack();
+                        if (isCompleteTheLevel) return;
+                        continue;
+                    case 2:
+                        if (targetMob.Hp > 0)
                         {
-                            GameOver();
+                            if (GameManager.player.TakeDamage(targetMob.Attack))
+                            {
+                                GameOver();
+                                return;
+                            }
+                        }
+
+                        break;
+                    case 3:
+                        if (TryEscape())
+                        {
+                            Console.WriteLine("\n成功逃脫!");
+                            isCompleteTheLevel = true;
+                            isCrateFightList = false;
+                            GameManager.startExplore = false;
                             return;
                         }
-                    }
-                    break;
-                case 3:
-                    if (TryEscape())
-                    {
-                        Console.WriteLine("\n成功逃脫!");
-                        isCompleteTheLevel = true;
-                        isCrateFightList = false;
-                        GameManager.startExplore = false;
-                        return;
-                    }
-                    else 
-                    {
-                        Console.WriteLine("\n逃跑失敗!");
-                        if (GameManager.player.TakeDamage(targetMob.Attack))
+                        else
                         {
-                            GameOver();
-                            return;
+                            Console.WriteLine("\n逃跑失敗!");
+                            Console.WriteLine($"\n{targetMob.Name} 發動攻擊!");
+                            if (GameManager.player.TakeDamage(targetMob.Attack))
+                            {
+                                GameOver();
+                                return;
+                            }
+
+                            Console.WriteLine($"玩家血量: {GameManager.player.hp}/{GameManager.player.hpMax}");
+                            continue;
                         }
-                    }
-                    break;
+                }
             }
         }
     }
 
     private bool TryEscape()
     {
-        Random rand = new Random();
         int escapeChance = 40 + (GameManager.player.playerClass.dex * 2);
-        return rand.Next(1, 101) <= escapeChance;
+        return ram.Next(1, 101) <= escapeChance;
     }
 
     public void Attack()
     {
-        int dice = ram.Next(1,20);
+        int dice = ram.Next(1, 20);
         int damage = 0;
         if (dice == 1)
         {
@@ -266,52 +273,31 @@ public class ExploreSystem
         {
             damage = GameManager.player.damage;
         }
-        
+
         if (damage <= targetMob.Hp)
         {
             Console.WriteLine($"\n對{targetMob.Name}造成{damage}點傷害");
-            targetMob.Hp-=damage;
+            targetMob.Hp -= damage;
         }
         else
         {
             targetMob.Hp = 0;
         }
 
-        if (targetMob.Hp == 0)
+        if (targetMob.Hp <= 0)
         {
-            Console.WriteLine("\n目標已死亡");
-            Console.WriteLine($"獲得{targetMob.Exp}點經驗值");
-            
-            if (GameManager.player.exp + targetMob.Exp >= GameManager.player.expMax)
-            {
-                int extraExp = GameManager.player.exp + targetMob.Exp - GameManager.player.expMax;
-                GameManager.player.LevelUp(extraExp);
-            }
-            else
-            {
-                GameManager.player.exp += targetMob.Exp;
-                Console.WriteLine($"經驗值:{GameManager.player.exp}/{GameManager.player.expMax}");
-            }
-            
             mobToFightList.Remove(targetMob);
-            if (mobToFightList.Count == 0)
-            {
-                Console.WriteLine("\n已殲滅所有敵人!");
-                currentLevel++;
-                isCompleteTheLevel = true;
-                isCrateFightList = false;
-                return;
-            }
+            HandleBattleReward(targetMob);
         }
-
-        if (targetMob.Hp > 0)
+        else
         {
             Console.WriteLine($"\n{targetMob.Name} 發動攻擊!");
             if (GameManager.player.TakeDamage(targetMob.Attack))
             {
-                Console.WriteLine("\n你死了!");
                 GameOver();
+                return;
             }
+
             Console.WriteLine($"玩家血量: {GameManager.player.hp}/{GameManager.player.hpMax}");
         }
     }
@@ -324,23 +310,24 @@ public class ExploreSystem
         GameManager.startExplore = false;
         isCompleteTheLevel = true;
         isCrateFightList = false;
-        
-        // 返回村莊並恢復HP
+
         GameManager.player.hp = GameManager.player.hpMax;
     }
-    
+
     private void ShowNextLevelMenu()
     {
         while (true)
         {
-            Console.WriteLine("\n=== 選擇下一步 ===");
+            Console.WriteLine($"\n=== 選擇下一步 ===");
+            Console.WriteLine($"當前位置：第{currentLevel}層");
             Console.WriteLine("[1] 繼續探索");
             Console.WriteLine("[2] 返回村莊");
-            
+
             ConsoleKeyInfo answer = Console.ReadKey();
             if (answer.Key == ConsoleKey.D1)
             {
                 Console.WriteLine("\n繼續前進...");
+                isCompleteTheLevel = false;
                 return;
             }
             else if (answer.Key == ConsoleKey.D2)

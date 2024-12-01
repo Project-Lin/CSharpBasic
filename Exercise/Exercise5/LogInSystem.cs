@@ -32,30 +32,7 @@ namespace Exercise5
                 playerData.Add(input, player);
                 isLoggedIn = true;
                 return player;
-                
             }
-        }
-
-        public static void SaveGame()
-        {
-            var saveData = new Dictionary<string, object>();
-            foreach (var player in playerData)
-            {
-                saveData[player.Key] = new {
-                    Name = player.Value.name,
-                    Level = player.Value.level,
-                    Class = player.Value.playerClass.number,
-                    Hp = player.Value.hp,
-                    Exp = player.Value.exp,
-                    Gold = player.Value.Gold,
-                    Inventory = player.Value.Inventory.Select(i => new {
-                        ItemName = i.Key.Name,
-                        Count = i.Value
-                    }).ToList()
-                };
-            }
-            
-            File.WriteAllText(saveFilePath, JsonSerializer.Serialize(saveData));
         }
     }
 }

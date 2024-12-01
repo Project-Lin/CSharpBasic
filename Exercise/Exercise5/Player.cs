@@ -3,7 +3,7 @@
     public class Player
     {
         public string name;
-        public int level,hp,hpMax,exp,expMax;
+        public int level, hp, hpMax, exp, expMax;
         public int damage { get; set; }
         public PlayerClass playerClass = null;
         public int defense { get; set; }
@@ -38,7 +38,7 @@
             PlayerClass _playerClass = new PlayerClass();
             playerClass = _playerClass;
         }
-        
+
         public void CalculateDamage()
         {
             switch (playerClass.number)
@@ -62,12 +62,12 @@
         {
             level++;
             exp = extraExp;
-            
+
             int strGrowth = 1;
             int intGrowth = 1;
             int dexGrowth = 1;
             int lukGrowth = 1;
-            
+
             switch (playerClass.number)
             {
                 case 0: // 戰士
@@ -83,21 +83,21 @@
                     intGrowth = 3;
                     break;
             }
-            
+
             playerClass.str += strGrowth;
             playerClass.Int += intGrowth;
             playerClass.dex += dexGrowth;
             playerClass.luk += lukGrowth;
-            
+
             // HP成長
             hpMax += level * 20;
             hp = hpMax; // 升級時回滿HP
-            
+
             expMax = level * 50 + 100; // 調整經驗值曲線
-            
+
             ShowLevelUpState(strGrowth, intGrowth, dexGrowth, lukGrowth);
         }
-        
+
         public void ShowLevelUpState(int strGrowth, int intGrowth, int dexGrowth, int lukGrowth)
         {
             Console.WriteLine("\n*** 升級! ***");
@@ -115,18 +115,19 @@
         {
             defense = (int)(playerClass.str * 0.5 + playerClass.dex * 0.3);
         }
-        
+
         public bool TakeDamage(int damage)
         {
             int actualDamage = Math.Max(1, damage - defense);
             hp -= actualDamage;
             Console.WriteLine($"\n受到 {actualDamage} 點傷害!");
-            
+
             if (hp <= 0)
             {
                 hp = 0;
                 return true; // 死亡
             }
+
             return false;
         }
 
@@ -140,6 +141,7 @@
             {
                 Inventory.Add(item, count);
             }
+
             Console.WriteLine($"\n獲得 {item.Name} x{count}");
         }
 
@@ -150,26 +152,26 @@
                 Console.WriteLine("\n沒有足夠的物品!");
                 return false;
             }
-            
-            // 檢查是否為戰鬥中可用的物品
+
             if (GameManager.startExplore && !(item is Potion || item is Bomb))
             {
                 Console.WriteLine("\n戰鬥中只能使用藥水或炸彈!");
                 return false;
             }
-            
+
             if (item is Potion && hp >= hpMax)
             {
                 Console.WriteLine("\nHP已經是滿的!");
                 return false;
             }
-            
+
             item.Use(this);
             Inventory[item]--;
             if (Inventory[item] <= 0)
             {
                 Inventory.Remove(item);
             }
+
             return true;
         }
 
