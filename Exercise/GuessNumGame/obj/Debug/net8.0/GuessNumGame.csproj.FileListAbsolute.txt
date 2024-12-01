@@ -1,0 +1,15 @@
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\bin\Debug\net8.0\GuessNumGame.exe
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\bin\Debug\net8.0\GuessNumGame.deps.json
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\bin\Debug\net8.0\GuessNumGame.runtimeconfig.json
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\bin\Debug\net8.0\GuessNumGame.dll
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\bin\Debug\net8.0\GuessNumGame.pdb
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.AssemblyInfoInputs.cache
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.AssemblyInfo.cs
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.csproj.CoreCompileInputs.cache
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.sourcelink.json
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.dll
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\refint\GuessNumGame.dll
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.pdb
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\GuessNumGame.genruntimeconfig.cache
+C:\C_Sharp\CSharpBasic\Exercise\GuessNumGame\obj\Debug\net8.0\ref\GuessNumGame.dll

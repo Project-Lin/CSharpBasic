@@ -45,7 +45,7 @@ public class Menu
                 LogInSystem.SaveGame();
                 GameManager.player = null;
                 LogInSystem.isLoggedIn = false;
-                ExploreSystem.currentLevel = 1;
+                ExploreSystem.currentLevel = ExploreSystem.currentLevel;
                 GameManager.startExplore = false;
                 ExploreSystem.isCompleteTheLevel = false;
                 ExploreSystem.isCrateFightList = false;
@@ -54,7 +54,10 @@ public class Menu
         }
         else if (Anser.Key == ConsoleKey.D2)
         {
-            Console.WriteLine("\n確定要離開遊戲嗎?(Y/N)");
+            if (CheckSelect("離開遊戲"))
+            {
+                Environment.Exit(0);
+            }
         }
         else if (Anser.Key == ConsoleKey.D3)
         {

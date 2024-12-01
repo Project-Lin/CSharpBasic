@@ -40,20 +40,20 @@
 
         public void StartGame()
         {
-            while (true)
+            while (LogInSystem.isLoggedIn && player != null)
             {
-                if (!LogInSystem.isLoggedIn || player == null)
-                {
-                    return;
-                }
+                // if (!LogInSystem.isLoggedIn || player == null)
+                // {
+                //     return;
+                // }
 
-                while (!startExplore)
+                while (!startExplore && LogInSystem.isLoggedIn)
                 {
                     menu.MainMenu();
                 }
 
                 ExploreSystem.isCompleteTheLevel = false;
-                while (!ExploreSystem.isCompleteTheLevel)
+                while (!ExploreSystem.isCompleteTheLevel && LogInSystem.isLoggedIn)
                 {
                     StartExplore();
                 }

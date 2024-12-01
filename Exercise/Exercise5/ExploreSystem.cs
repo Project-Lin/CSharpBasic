@@ -25,14 +25,12 @@ public class ExploreSystem
         new Bomb("超級炸彈", 300) { Description = "對所有敵人造成雙倍攻擊力的傷害" },
     };
     
-    // 探索主流程
     public void StartExplore()
     {
         Console.WriteLine($"\n=== 當前位置：荒野 第{currentLevel}層 ===");
         CreateScenes();
     }
 
-    // 場景生成
     public void CreateScenes()
     {
         currentMobs.Clear();
@@ -40,27 +38,26 @@ public class ExploreSystem
         
         switch (sceneType)
         {
-            case < 6: // 60% 戰鬥
+            case < 6: 
                 Console.WriteLine("\n遭遇敵人!");
                 CreateFightList();
                 Fight();
                 break;
                 
-            case < 8: // 20% 事件
+            case < 8: 
                 HandleEvent();
                 break;
                 
-            default: // 20% 寶箱
+            default:
                 HandleTreasure();
                 break;
         }
     }
-
-    // 戰鬥相關
+    
     private void CreateFightList()
     {
         mobToFightList.Clear();
-        int mobCount = ram.Next(1, Math.Min(currentLevel + 1, 5)); // 根據層數增加怪物數量，最多4隻
+        int mobCount = ram.Next(1, Math.Min(currentLevel + 1, 5)); 
         
         for (int i = 0; i < mobCount; i++)
         {
@@ -74,13 +71,19 @@ public class ExploreSystem
 
     private Mob.MobType GetRandomMobType()
     {
-        int chance = ram.Next(0, 100);
-        if (currentLevel >= 5 && chance < 10) return Mob.MobType.dragon;  // 5層以上10%出現龍
-        if (currentLevel >= 3 && chance < 30) return Mob.MobType.pig;     // 3層以上30%出現野豬騎士
-        return chance < 60 ? Mob.MobType.slime : Mob.MobType.goblin;         // 60%史萊姆，40%哥布林
-    }
+        int dice = ram.Next(0, 100);
+        if (currentLevel >= 5 && dice < 10)
+        {
+            return Mob.MobType.dragon;
+        }
 
-    // 事件處理
+        if (currentLevel >= 3 && dice < 30)
+        {
+            return Mob.MobType.pig;
+        }     
+        return dice < 60 ? Mob.MobType.slime : Mob.MobType.goblin;       
+    }
+    
     private void HandleEvent()
     {
         int eventType = ram.Next(0, 3);
@@ -122,14 +125,14 @@ public class ExploreSystem
     private void HandleMerchant()
     {
         Console.WriteLine("\n遇到了神秘商人!");
-        // 這裡可以實現商人的購買邏輯
+        // 商人的購買
     }
 
-    // 寶箱處理
+
     private void HandleTreasure()
     {
         Console.WriteLine("\n發現寶箱!");
-        bool isRare = ram.Next(0, 100) < 20; // 20%機率獲得稀有寶箱
+        bool isRare = ram.Next(0, 100) < 20; 
         
         var treasureList = isRare ? rareTreasures : commonTreasures;
         var treasure = treasureList[ram.Next(treasureList.Count)];
@@ -141,8 +144,7 @@ public class ExploreSystem
         ShowNextLevelMenu();
         isCompleteTheLevel = true;
     }
-
-    // 戰鬥結算
+    
     private void HandleBattleReward(Mob mob)
     {
         Console.WriteLine($"\n擊敗了 {mob.Name}!");
@@ -158,9 +160,8 @@ public class ExploreSystem
             GameManager.player.exp += mob.Exp;
             Console.WriteLine($"經驗值: {GameManager.player.exp}/{GameManager.player.expMax}");
         }
-
-        // 隨機掉落物品
-        if (ram.Next(0, 100) < 30) // 30%掉落機率
+        
+        if (ram.Next(0, 100) < 30) 
         {
             var drop = commonTreasures[ram.Next(commonTreasures.Count)];
             GameManager.player.AddItem(drop);
@@ -177,19 +178,19 @@ public class ExploreSystem
             isCrateFightList = true;
         }
         
-        // 确保有可战斗的怪物
+        
         if (mobToFightList.Count == 0)
         {
-            Console.WriteLine("\n没有可战斗的怪物!");
+            Console.WriteLine("\n沒有可戰鬥的怪物!");
             isCompleteTheLevel = true;
             return;
         }
         
-        // 确保目标选择有效
+        
         target = menu.FightMenu(mobToFightList);
         while (target < 0 || target >= mobToFightList.Count)
         {
-            Console.WriteLine("\n请选择有效的目标!");
+            Console.WriteLine("\n請選擇有效的目標!");
             target = menu.FightMenu(mobToFightList);
         }
         
@@ -205,11 +206,7 @@ public class ExploreSystem
                     break;
                 case 1:
                     Attack();
-                    if (isCompleteTheLevel) return; // 如果已經完成關卡，直接返回
-                    // if (mobToFightList.Count > 0)
-                    // {
-                    //     target = menu.FightMenu(mobToFightList);
-                    // }
+                    if (isCompleteTheLevel) return; 
                     continue;
                 case 2:
                     if (targetMob.Hp > 0)
@@ -247,7 +244,6 @@ public class ExploreSystem
     private bool TryEscape()
     {
         Random rand = new Random();
-        // 逃跑成功率基於玩家敏捷
         int escapeChance = 40 + (GameManager.player.playerClass.dex * 2);
         return rand.Next(1, 101) <= escapeChance;
     }

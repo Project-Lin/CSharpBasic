@@ -63,7 +63,6 @@
             level++;
             exp = extraExp;
             
-            // 根據職業調整成長值
             int strGrowth = 1;
             int intGrowth = 1;
             int dexGrowth = 1;

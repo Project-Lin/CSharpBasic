@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Uad9R5z2Z7E=",
+  "success": true,
+  "projectFilePath": "C:\\C_Sharp\\CSharpBasic\\Exercise\\GuessNumGame\\GuessNumGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\s1120\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
+  ],
+  "logs": []
+}

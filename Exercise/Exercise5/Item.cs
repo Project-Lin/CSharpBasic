@@ -2,22 +2,22 @@ namespace Exercise5
 {
     public class Item
     {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int Value { get; set; }
         public ItemType Type { get; set; }
 
         public enum ItemType
         {
-            Potion,    // 藥水
-            Equipment, // 裝備
-            Material,  // 材料
-            Treasure   // 寶物
+            Potion,    
+            Equipment, 
+            Boom,  
+            Treasure  
         }
 
         public virtual void Use(Player player)
         {
-            // 基礎使用邏輯
+            
         }
     }
 
@@ -57,7 +57,7 @@ namespace Exercise5
         {
             Name = name;
             Value = value;
-            Type = ItemType.Material;
+            Type = ItemType.Boom;
             Description = "對所有敵人造成雙倍攻擊力的傷害";
         }
 
